@@ -3,6 +3,8 @@ import 'package:caivideo/page/home/sigin/siginHome.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'addform.dart';
+
 class Homeaddvideo extends StatefulWidget {
   const Homeaddvideo({Key? key}) : super(key: key);
 
@@ -33,6 +35,7 @@ class _HomeaddvideoState extends State<Homeaddvideo> {
 
   @override
   Widget build(BuildContext context) {
-    return (isAuth) ? AddVideoHome() : SiginHome();
+    // return (isAuth) ? AddVideoHome() : SiginHome();
+    return (isAuth) ? AddVideoHome() : AddForm();
   }
 }
