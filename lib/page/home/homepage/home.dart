@@ -18,12 +18,20 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             SizedBox(height: 8),
+            Container(
+              margin: const EdgeInsets.only(right: 250),
+              child: Text(
+                "Semua Video",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+              ),
+            ),
+            SizedBox(height: 8),
             NewVideo(),
             Container(
               margin: const EdgeInsets.only(right: 250),
               child: Text(
                 "Trending Video",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
               ),
             ),
             SizedBox(height: 10),
@@ -32,7 +40,7 @@ class _HomeState extends State<Home> {
               margin: const EdgeInsets.only(right: 250, top: 20),
               child: Text(
                 "Kategori Video",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
               ),
             ),
             SizedBox(height: 8),
