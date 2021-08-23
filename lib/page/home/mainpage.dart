@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:caivideo/page/home/addvideo/checkauth.dart';
+import 'package:caivideo/page/home/component/customappbar.dart';
 import 'package:caivideo/page/home/homepage/home.dart';
 import 'package:caivideo/page/home/playlist/playlistpage.dart';
 import 'package:caivideo/page/home/trending/trendingHome.dart';
@@ -35,24 +36,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.purple.shade900),
-        backgroundColor: Colors.white,
-        title: Text(
-          _selectedIndex == 0
-              ? "Home"
-              : _selectedIndex == 1
-                  ? "trending"
-                  : _selectedIndex == 2
-                      ? "add Video"
-                      : _selectedIndex == 3
-                          ? "Subscriber"
-                          : _selectedIndex == 4
-                              ? "Profile"
-                              : "",
-          style: TextStyle(color: Colors.purple.shade900),
-        ),
-      ),
+      appBar: customappbar(context,_selectedIndex),
       body: Container(
         child: _pages.elementAt(_selectedIndex), //New
       ),

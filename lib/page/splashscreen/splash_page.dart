@@ -1,7 +1,8 @@
 import 'dart:async';
-
+import 'package:caivideo/page/home/mainpage.dart';
 import 'package:caivideo/page/onbording/onbording_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splashpage extends StatefulWidget {
   const Splashpage({Key? key}) : super(key: key);
@@ -14,10 +15,24 @@ class _SplashpageState extends State<Splashpage> {
   @override
   void initState() {
     super.initState();
-    Timer(
-        Duration(seconds: 5),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => OnBoardingPage())));
+    cekintro();
+  }
+
+  Future<void> cekintro() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var intro = ((localStorage.getBool('intro') == null) ? false : true);
+
+    if (intro == true) {
+      Timer(
+          Duration(seconds: 5),
+          () => Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => MainPage())));
+    } else {
+      Timer(
+          Duration(seconds: 5),
+          () => Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => OnBoardingPage())));
+    }
   }
 
   @override
