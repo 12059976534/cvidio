@@ -1,3 +1,6 @@
+import 'package:caivideo/model/kategori/HomeKategori.dart';
+import 'package:caivideo/service/KategoriVideo.dart';
+import 'package:caivideo/utils/string.dart';
 import 'package:flutter/material.dart';
 
 class AddForm extends StatefulWidget {
@@ -12,6 +15,21 @@ class _AddFormState extends State<AddForm> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   var _currentSelectedValue;
+     
+
+     var x;
+     datalist() async {
+        await KategoriService.getListKategori().then((value) {
+          List<String> kategoridata = [];
+          for (int i = 0; i < value.length; i++) {
+            kategoridata.add(value[i].name.toString());
+          }
+          x = kategoridata;
+          setState(() {});
+        });
+        print("data geters: $x");
+        // return x;
+      }
 
   _showMsg(msg) {
     final snackBar = SnackBar(
@@ -20,29 +38,26 @@ class _AddFormState extends State<AddForm> {
     _scaffoldKey.currentState!.showSnackBar(snackBar);
   }
 
-  // ====
-  var _currencies = [
-    "Food",
-    "Transport",
-    "Personal",
-    "Shopping",
-    "Medical",
-    "Rent",
-    "Movie",
-    "Salary"
-  ];
-  // ===
   var _chosenValue;
   var _textpriveiw;
+  var k = KategoriService();
+
+  late var dataku;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    datalist();
+  }
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
         child: ListView(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(left: 5, right: 5,top: 10),
+          margin: EdgeInsets.only(left: 5, right: 5, top: 10),
           child: Column(
             children: [
               Row(
@@ -174,131 +189,144 @@ class _AddFormState extends State<AddForm> {
           ),
         ),
 
-        // ====
-       Container(
-         margin: EdgeInsets.only(top: 20,left: 5,right: 5,bottom: 30),
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-           children:<Widget> [
-            //==kategori==
-          Container(
-          padding: EdgeInsets.only(left: 10,right: 10),
-          width: MediaQuery.of(context).size.width/2.5,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black54),
-            borderRadius: BorderRadius.circular(5)
-          ),
-          child: Center(
-            child: DropdownButton<String>(
-              underline: SizedBox(),
-              // focusColor: Colors.white,
-              value: _chosenValue,
-              elevation: 0,
+        // ==dropdown==
+        Container(
+          color: Colors.amberAccent,
+          margin: EdgeInsets.only(top: 20, left: 5, right: 5, bottom: 30),
+          padding: EdgeInsets.only(top: 5,bottom: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              //==kategori==
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                width: MediaQuery.of(context).size.width / 2.3,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black54),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: DropdownButton<String>(
+                    underline: SizedBox(),
+                    // focusColor: Colors.white,
+                    value: _chosenValue,
+                    elevation: 0,
 
-
-              style: TextStyle(color: Colors.white),
-              iconEnabledColor: Colors.black,
-              items: <String>[
-                'Android',
-                'IOS',
-                'Flutter',
-                'Node',
-                'Java',
-                'Python',
-                'PHP',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
+                    style: TextStyle(color: Colors.white),
+                    iconEnabledColor: Colors.black,
+                    // items: <String>[
+                    //   'Android',
+                    //   'IOS',
+                    //   'Flutter',
+                    //   'Node',
+                    //   'Java',
+                    //   'Python',
+                    //   'PHP',
+                    // ].map<DropdownMenuItem<String>>((String value) {
+                    //   return DropdownMenuItem<String>(
+                    //     value: value,
+                    //     child: Text(
+                    //       value,
+                    //       style: TextStyle(color: Colors.black),
+                    //     ),
+                    //   );
+                    // }).toList(),
+                    items: (x!=null)?
+                    x.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
                   
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(color: Colors.black),
+                        value: value,
+                        child: Container(
+                          child: Text(
+                            value,overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      );
+                    }).toList()
+                    :<String>["waiting"].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      );
+                    }).toList(),
+
+                    hint: (_textpriveiw == null)
+                        ? Text('Kategory')
+                        : Text("$_textpriveiw"),
+
+                    onChanged: (value) {
+                      setState(() {
+                        _chosenValue = value;
+                        _textpriveiw = value;
+                        print(value);
+                      });
+                    },
                   ),
-                
-                );
-              }).toList(),
-              hint:
-                  (_textpriveiw == null) ? Text('Kategory') : Text("$_textpriveiw"),
-                  
-              onChanged: (value) {
-                setState(() {
-                  _chosenValue = value;
-                  _textpriveiw = value;
-                  print(value);
-                });
-              },
-            ),
+                ),
+              ),
+              // ==========
+              // ==subkategori==
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                width: MediaQuery.of(context).size.width / 2.3,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black54),
+                    borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: DropdownButton<String>(
+                    underline: SizedBox(),
+                    focusColor: Colors.white,
+                    value: _chosenValue,
+                    elevation: 0,
+                    style: TextStyle(color: Colors.white),
+                    iconEnabledColor: Colors.black,
+                    items: <String>[
+                      
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      );
+                    }).toList(),
+                    hint: (_textpriveiw == null)
+                        ? Text(
+                            'Sub-category',
+                          )
+                        : Text("$_textpriveiw"),
+                    // elevation: 0,
+                    onChanged: (value) {
+                      setState(() {
+                        _chosenValue = value;
+                        _textpriveiw = value;
+                        print(value);
+                      });
+                    },
+                  ),
+                ),
+              ),
+              // ===============
+            ],
           ),
         ),
-            // ==========
-            // ==subkategori==
-             Container(
-          padding: EdgeInsets.only(left: 10,right: 10),
-          width: MediaQuery.of(context).size.width/2.5,
-          
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black54),
-            borderRadius: BorderRadius.circular(5)
-          ),
+        // ==/dropdown==
+
+        Container(
+          margin: EdgeInsets.only(bottom: 20, right: 5, left: 5),
+          padding: EdgeInsets.all(19),
+          width: MediaQuery.of(context).size.width,
           child: Center(
-            child: DropdownButton<String>(
-              underline: SizedBox(),
-              focusColor: Colors.white,
-              value: _chosenValue,
-              elevation: 0,
-              style: TextStyle(color: Colors.white),
-              iconEnabledColor: Colors.black,
-              items: <String>[
-                'Android',
-                'IOS',
-                'Flutter',
-                'Node',
-                'Java',
-                'Python',
-                'PHP',
-              ].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(color: Colors.red),
-                  ),
-                );
-              }).toList(),
-              hint:
-                  (_textpriveiw == null) ? Text('Sub-category',): Text("$_textpriveiw"),
-              // elevation: 0,
-              onChanged: (value) {
-                setState(() {
-                  _chosenValue = value;
-                  _textpriveiw = value;
-                  print(value);
-                });
-              },
-            ),
+            child: Text("Upload"),
           ),
-        ),
-            // ===============
-           ],
-         ),
-       ),
-        // =====
-      
-
-      Container(
-        margin: EdgeInsets.only(bottom: 20,right: 5,left: 5),
-        padding: EdgeInsets.all(19),
-        width: MediaQuery.of(context).size.width,
-        child: Center(
-          child: Text("Upload"),
-        ),
-        decoration: BoxDecoration(
-          color: Colors.purple.shade900,
-          borderRadius: BorderRadius.circular(5)
-        ),
-      )
-
-
+          decoration: BoxDecoration(
+              color: Colors.purple.shade900,
+              borderRadius: BorderRadius.circular(5)),
+        )
       ],
     ));
   }

@@ -86,16 +86,17 @@ class _AddVideoHomeState extends State<AddVideoHome> {
                           MediaQuery.of(context).size.width, 50), //////// HERE
                     ),
                     onPressed: () async {
+                      
                       // service.uploadFileToServer("imagePath");
                       // var file = await ImagePicker.pickImage(source: ImageSource.gallery);
-                      var file = await ImagePicker()
-                          .pickVideo(source: ImageSource.gallery);
-                      var res = await service
-                          .uploadFileToServer(file!.path)
-                          .then((value) => (data) {
-                                print(data);  
-                              });
-                      setState(() {});
+                      // var file = await ImagePicker()
+                      //     .pickVideo(source: ImageSource.gallery);
+                      // var res = await service
+                      //     .uploadFileToServer(file!.path)
+                      //     .then((value) => (data) {
+                      //           print(data);  
+                      //         });
+                      // setState(() {});
                     },
                     child: Text('Add Video'),
                   ),
