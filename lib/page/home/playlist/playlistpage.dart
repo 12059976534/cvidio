@@ -97,7 +97,7 @@ class Cardwiget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height / 11,
+            height: MediaQuery.of(context).size.height / 12,
             child: Image.network(
               "https://balisobek.com/wp-content/uploads/2019/10/sobek-Bali-adventure-tours-1.jpg",
               fit: BoxFit.cover,

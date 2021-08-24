@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customappbar(context,_selectedIndex),
+      appBar: customappbar(context, _selectedIndex),
       body: Container(
         child: _pages.elementAt(_selectedIndex), //New
       ),
