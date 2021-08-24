@@ -72,9 +72,9 @@ Widget itemvideo(LatestVideo data, BuildContext context, List video) {
               width: MediaQuery.of(context).size.width,
               height: 120,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(2.0),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
+                  borderRadius: BorderRadius.circular(5.0),
                   child: CachedNetworkImage(
                     imageUrl: data.coverPhoto!,
                     fit: BoxFit.cover,
@@ -90,20 +90,34 @@ Widget itemvideo(LatestVideo data, BuildContext context, List video) {
                 ),
               ),
             ),
-            Container(
-                child: ListTile(
-              title: Text(
-                data.title!,
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                maxLines: 2,
-              ),
-              subtitle: Text(
-                data.category!,
-                style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-                maxLines: 2,
-              ),
-              trailing: Icon(Icons.more_vert),
-            )),
+            GestureDetector(
+              onTap: () {
+        Navigator.push(
+          context,
+          new MaterialPageRoute(
+              builder: (context) => SamplePlayer(
+                  link: data.stream, media: video, title: data.title)),
+        );
+      },
+              child: Container(
+                  child: ListTile(
+                title: Text(
+                  data.title!,
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  maxLines: 2,
+                ),
+                subtitle: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      data.category!,
+                      maxLines: 2,
+                    ),
+                    Text(data.viewsCount! + " views"),
+                  ],
+                ),
+              )),
+            ),
           ],
         ),
       ),
