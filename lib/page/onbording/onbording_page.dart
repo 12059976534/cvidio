@@ -15,9 +15,9 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   Future<void> _onIntroEnd(context) async {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setBool('intro', true);
-    Navigator.of(context).push(
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    localStorage.setBool('intro', true);
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => MainPage()),
     );
   }
