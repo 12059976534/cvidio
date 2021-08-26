@@ -59,6 +59,7 @@ flutter:
     - assets/image/login/
     - assets/image/auth/
     - assets/image/add/
+    - assets/image/globalIcon/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,7 +1,10 @@
 import 'package:caivideo/model/kategori/HomeKategori.dart';
+import 'package:caivideo/page/home/homepage/listkategorihome/kategorivideo.dart';
 import 'package:caivideo/service/KategoriVideo.dart';
 import 'package:caivideo/utils/string.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:caivideo/service/addVideoService.dart';
 
 class AddForm extends StatefulWidget {
   const AddForm({Key? key}) : super(key: key);
@@ -11,25 +14,43 @@ class AddForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AddForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Form(),
+    );
+
+    // ============================
+  }
+}
+
+class Form extends StatefulWidget {
+  const Form({Key? key}) : super(key: key);
+
+  @override
+  _FormState createState() => _FormState();
+}
+
+class _FormState extends State<Form> {
+  var service = new Upload();
   var email;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   var _currentSelectedValue;
-     
 
-     var x;
-     datalist() async {
-        await KategoriService.getListKategori().then((value) {
-          List<String> kategoridata = [];
-          for (int i = 0; i < value.length; i++) {
-            kategoridata.add(value[i].name.toString());
-          }
-          x = kategoridata;
-          setState(() {});
-        });
-        print("data geters: $x");
-        // return x;
+  var x;
+  datalist() async {
+    await KategoriService.getListKategori().then((value) {
+      List<String> kategoridata = [];
+      for (int i = 0; i < value.length; i++) {
+        kategoridata.add(value[i].name.toString());
       }
+      x = kategoridata;
+      setState(() {});
+    });
+    print("data geters: $x");
+    // return x;
+  }
 
   _showMsg(msg) {
     final snackBar = SnackBar(
@@ -44,7 +65,20 @@ class _AddFormState extends State<AddForm> {
 
   late var dataku;
 
+  // ====vidiopick====
+  var datavideo;
+  // =================
+  // ====thunailspick==
+  var datathumnails;
+  // ==================
+
+  // controler
+  final formGlobalKey = GlobalKey<FormState>();
+
   @override
+  TextEditingController namavidio = TextEditingController();
+  TextEditingController deskripsi = TextEditingController();
+  // ===/control====
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -56,6 +90,7 @@ class _AddFormState extends State<AddForm> {
     return Container(
         child: ListView(
       children: <Widget>[
+        // ====vidio====
         Container(
           margin: EdgeInsets.only(left: 5, right: 5, top: 10),
           child: Column(
@@ -68,7 +103,12 @@ class _AddFormState extends State<AddForm> {
                 ],
               ),
               GestureDetector(
-                onTap: () => print("berfungsi"),
+                onTap: () async {
+                  var videopick = await ImagePicker()
+                      .pickVideo(source: ImageSource.gallery);
+                  datavideo = videopick;
+                  setState(() {});
+                },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 5),
                   width: MediaQuery.of(context).size.width,
@@ -94,7 +134,12 @@ class _AddFormState extends State<AddForm> {
                 ],
               ),
               GestureDetector(
-                onTap: () => print("berfungsi"),
+                onTap: () async {
+                  var thumnails = await ImagePicker()
+                      .pickImage(source: ImageSource.gallery);
+                  datathumnails = thumnails;
+                  setState(() {});
+                },
                 child: Container(
                   margin: EdgeInsets.only(bottom: 5),
                   width: MediaQuery.of(context).size.width,
@@ -110,6 +155,7 @@ class _AddFormState extends State<AddForm> {
         ),
 
         // ===
+        // ==== nama vidio ===
         Container(
           margin: EdgeInsets.only(left: 5, right: 5),
           child: Column(
@@ -122,6 +168,8 @@ class _AddFormState extends State<AddForm> {
                 ],
               ),
               TextFormField(
+                  key: formGlobalKey,
+                  controller: namavidio,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -149,7 +197,7 @@ class _AddFormState extends State<AddForm> {
           ),
         ),
 
-        // ===
+        // // ====deskripsi====
         Container(
           margin: EdgeInsets.only(left: 5, right: 5),
           child: Column(
@@ -162,6 +210,8 @@ class _AddFormState extends State<AddForm> {
                 ],
               ),
               TextFormField(
+                  key: formGlobalKey,
+                  controller: deskripsi,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -189,11 +239,11 @@ class _AddFormState extends State<AddForm> {
           ),
         ),
 
-        // ==dropdown==
+        // ==dropdown kategori and sub==
         Container(
           color: Colors.amberAccent,
           margin: EdgeInsets.only(top: 20, left: 5, right: 5, bottom: 30),
-          padding: EdgeInsets.only(top: 5,bottom: 5),
+          padding: EdgeInsets.only(top: 5, bottom: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -213,45 +263,29 @@ class _AddFormState extends State<AddForm> {
 
                     style: TextStyle(color: Colors.white),
                     iconEnabledColor: Colors.black,
-                    // items: <String>[
-                    //   'Android',
-                    //   'IOS',
-                    //   'Flutter',
-                    //   'Node',
-                    //   'Java',
-                    //   'Python',
-                    //   'PHP',
-                    // ].map<DropdownMenuItem<String>>((String value) {
-                    //   return DropdownMenuItem<String>(
-                    //     value: value,
-                    //     child: Text(
-                    //       value,
-                    //       style: TextStyle(color: Colors.black),
-                    //     ),
-                    //   );
-                    // }).toList(),
-                    items: (x!=null)?
-                    x.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                  
-                        value: value,
-                        child: Container(
-                          child: Text(
-                            value,overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      );
-                    }).toList()
-                    :<String>["waiting"].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      );
-                    }).toList(),
+                    items: (x != null)
+                        ? x.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Container(
+                                child: Text(
+                                  value,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
+                            );
+                          }).toList()
+                        : <String>["waiting"]
+                            .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            );
+                          }).toList(),
 
                     hint: (_textpriveiw == null)
                         ? Text('Kategory')
@@ -283,9 +317,8 @@ class _AddFormState extends State<AddForm> {
                     elevation: 0,
                     style: TextStyle(color: Colors.white),
                     iconEnabledColor: Colors.black,
-                    items: <String>[
-                      
-                    ].map<DropdownMenuItem<String>>((String value) {
+                    items: <String>[]
+                        .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(
@@ -316,16 +349,35 @@ class _AddFormState extends State<AddForm> {
         ),
         // ==/dropdown==
 
-        Container(
-          margin: EdgeInsets.only(bottom: 20, right: 5, left: 5),
-          padding: EdgeInsets.all(19),
-          width: MediaQuery.of(context).size.width,
-          child: Center(
-            child: Text("Upload"),
+        GestureDetector(
+          onTap: () async {
+            // var file =
+            //     await ImagePicker().pickVideo(source: ImageSource.gallery);
+            var res = await service
+                .uploadFileToServer(
+                  // file!.path,
+                  datathumnails.path,
+                  datavideo.path,
+                  _textpriveiw,
+                  namavidio.text,
+                  deskripsi.text,
+                )
+                .then((value) => (data) {
+                      print(data);
+                    });
+            setState(() {});
+          },
+          child: Container(
+            margin: EdgeInsets.only(bottom: 20, right: 5, left: 5),
+            padding: EdgeInsets.all(19),
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+              child: Text("Upload"),
+            ),
+            decoration: BoxDecoration(
+                color: Colors.purple.shade900,
+                borderRadius: BorderRadius.circular(5)),
           ),
-          decoration: BoxDecoration(
-              color: Colors.purple.shade900,
-              borderRadius: BorderRadius.circular(5)),
         )
       ],
     ));

@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:caivideo/page/home/mainpage.dart';
+import 'package:caivideo/page/profile/editform.dart';
 import 'package:caivideo/service/LoginService.dart';
 import 'package:caivideo/service/addVideoService.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
+
+import 'addform.dart';
 
 class AddVideoHome extends StatefulWidget {
   const AddVideoHome({Key? key}) : super(key: key);
@@ -18,24 +21,65 @@ class _AddVideoHomeState extends State<AddVideoHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: new IconButton(
+          icon: Image.asset("assets/image/globalIcon/backicon.png"),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          "Channel saya",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+        actions: [
+          setAppbar(icondata: "assets/image/globalIcon/search.png",),
+          setAppbar(icondata: "assets/image/globalIcon/filter.png",),
+          setAppbar(icondata: "assets/image/globalIcon/notipikasi.png",),
+          setAppbar(icondata: "assets/image/globalIcon/settings.png",),
+        ],
+      ),
       body: ListView(children: <Widget>[
         //image profile
-        ListTile(
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrCQGNZfrSIPzy9tZpDUrTg6PAEORRzUZHkA&usqp=CAU"),
-            child: Container(
-                // color: Colors.black,
-                margin: EdgeInsets.only(left: 20, top: 12),
-                child: CircleAvatar(
-                    backgroundImage:
-                        AssetImage("assets/image/imageProfile/plus.png"),
+        Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height / 9,
+              // color: Colors.black,
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  // minRadius: 30,
+                  // maxRadius: 50,
+                  backgroundImage: NetworkImage(
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrCQGNZfrSIPzy9tZpDUrTg6PAEORRzUZHkA&usqp=CAU"),
+                  // child: Container(
+                  //     // color: Colors.black,
+                  //     margin: EdgeInsets.only(left: 20, top: 12),
+                  //     child: CircleAvatar(
+                  //         backgroundImage:
+                  //             AssetImage("assets/image/imageProfile/plus.png"),
+                  //         backgroundColor: Colors.white,
+                  //         radius: 10)),
+                ),
+                title: Text('Two-line ListTile'),
+                subtitle: Text('Here is a second line'),
+                trailing: Icon(Icons.more_vert),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 37, top: 27),
+              child: ListTile(
+                leading: CircleAvatar(
+                    radius: 10,
                     backgroundColor: Colors.white,
-                    radius: 10)),
-          ),
-          title: Text('Two-line ListTile'),
-          subtitle: Text('Here is a second line'),
-          trailing: Icon(Icons.more_vert),
+                    backgroundImage: AssetImage(
+                      "assets/image/add/plus.png",
+                    )),
+              ),
+            ),
+          ],
         ),
 
         //editbutton
@@ -57,7 +101,8 @@ class _AddVideoHomeState extends State<AddVideoHome> {
                           MediaQuery.of(context).size.width, 50), //////// HERE
                     ),
                     onPressed: () {
-                      logout();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => Editform()));
                     },
                     child: Text('EDIT'),
                   ),
@@ -86,7 +131,9 @@ class _AddVideoHomeState extends State<AddVideoHome> {
                           MediaQuery.of(context).size.width, 50), //////// HERE
                     ),
                     onPressed: () async {
-                      
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (BuildContext context) => AddForm()));
+
                       // service.uploadFileToServer("imagePath");
                       // var file = await ImagePicker.pickImage(source: ImageSource.gallery);
                       // var file = await ImagePicker()
@@ -94,7 +141,7 @@ class _AddVideoHomeState extends State<AddVideoHome> {
                       // var res = await service
                       //     .uploadFileToServer(file!.path)
                       //     .then((value) => (data) {
-                      //           print(data);  
+                      //           print(data);
                       //         });
                       // setState(() {});
                     },
@@ -106,34 +153,9 @@ class _AddVideoHomeState extends State<AddVideoHome> {
           ),
         ),
 
-        //logout button
-        Container(
-          child: Center(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Center(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.purple.shade900,
-                      onPrimary: Colors.white,
-                      shadowColor: Colors.purple.shade900,
-                      elevation: 3,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      minimumSize: Size(
-                          MediaQuery.of(context).size.width, 50), //////// HERE
-                    ),
-                    onPressed: () {
-                      logout();
-                    },
-                    child: Text('LOGOUT'),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        //list vidio
+
+        //  ==========
       ]),
     );
   }
@@ -148,5 +170,29 @@ class _AddVideoHomeState extends State<AddVideoHome> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => MainPage()));
     }
+  }
+}
+
+class setAppbar extends StatelessWidget {
+  String icondata;
+  setAppbar({
+    Key? key,
+    required this.icondata,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width/10,
+      // color: Colors.amber,
+      margin: EdgeInsets.only(right: 1,left: 0),
+      child: GestureDetector(
+          onTap: () {
+            print("object");
+            //           Navigator.of(context).push(MaterialPageRoute(
+            // builder: (BuildContext context) => ViewAll()));
+          },
+          child: Image(image: AssetImage(icondata))),
+    );
   }
 }
