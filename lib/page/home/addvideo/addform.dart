@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:better_player/better_player.dart';
 import 'package:caivideo/model/kategori/HomeKategori.dart';
 import 'package:caivideo/page/home/homepage/listkategorihome/kategorivideo.dart';
 import 'package:caivideo/service/KategoriVideo.dart';
@@ -5,6 +8,8 @@ import 'package:caivideo/utils/string.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:caivideo/service/addVideoService.dart';
+
+import 'widget.dart';
 
 class AddForm extends StatefulWidget {
   const AddForm({Key? key}) : super(key: key);
@@ -109,15 +114,34 @@ class _FormState extends State<Form> {
                   datavideo = videopick;
                   setState(() {});
                 },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 5),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3.5,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/image/add/Group 42.png"),
-                          fit: BoxFit.fill)),
-                ),
+                child: (datavideo == null)
+                    ? Container(
+                        margin: EdgeInsets.only(bottom: 5),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 3.5,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/image/add/Group 42.png"),
+                                fit: BoxFit.fill)),
+                      )
+                    : Container(
+                        margin: EdgeInsets.only(bottom: 5),
+                        // width: MediaQuery.of(context).size.width,
+                        // height: MediaQuery.of(context).size.height / 3.5,
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: BetterPlayer.file(
+                            datavideo.path,
+                            betterPlayerConfiguration:
+                                BetterPlayerConfiguration(
+                              // autoPlay: true,
+
+                              aspectRatio: 16 / 9,
+                            ),
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
@@ -135,20 +159,35 @@ class _FormState extends State<Form> {
               ),
               GestureDetector(
                 onTap: () async {
-                  var thumnails = await ImagePicker()
+                  var data = await ImagePicker()
                       .pickImage(source: ImageSource.gallery);
-                  datathumnails = thumnails;
+                  // XFile thumnails = (await ImagePicker()
+                  //     .pickImage(source: ImageSource.gallery)) as XFile;
+                  datathumnails = data;
                   setState(() {});
                 },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 5),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3.5,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/image/add/Group 45.png"),
-                          fit: BoxFit.fill)),
-                ),
+                child: (datathumnails != null)
+                    ? Container(
+                        margin: EdgeInsets.only(bottom: 5),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 3.5,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                // image: AssetImage("assets/image/add/Group 45.png"),
+                                image: FileImage(File(datathumnails.path)),
+                                fit: BoxFit.fill)),
+                      )
+                    : Container(
+                        margin: EdgeInsets.only(bottom: 5),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 3.5,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage("assets/image/add/Group 45.png"),
+                                // image:  FileImage(datathumnails),
+                                fit: BoxFit.fill)),
+                      ),
               ),
             ],
           ),
