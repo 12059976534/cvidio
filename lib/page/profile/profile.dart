@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-
-=======
 // import 'package:caivideo/model/trending/hometrending.dart';
 import 'package:caivideo/page/home/addvideo/addvideo.dart';
->>>>>>> fix/profile
 import 'package:flutter/material.dart';
 
 class SudahloginHOme extends StatefulWidget {
