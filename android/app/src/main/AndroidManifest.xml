@@ -1,10 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.caivideo">
     <uses-permission android:name="android.permission.INTERNET"/>
+<<<<<<< HEAD
     
    <application
         android:label="caivideo"
         android:icon="@mipmap/ic_launcher">
+=======
+   <application
+        android:label="caivideo"
+        android:icon="@mipmap/icon_caividio">
+>>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

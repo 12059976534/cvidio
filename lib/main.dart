@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+<<<<<<< HEAD
       title: 'Flutter Demo',
+=======
+      title: 'CAIvidio',
+>>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

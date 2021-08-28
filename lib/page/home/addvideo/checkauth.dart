@@ -35,7 +35,12 @@ class _HomeaddvideoState extends State<Homeaddvideo> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return (isAuth) ? AddVideoHome() : SiginHome();
     // return (isAuth) ? AddVideoHome() : AddForm();
+=======
+    // return (isAuth) ? AddVideoHome() : SiginHome();
+    return (isAuth) ? AddForm() : SiginHome();
+>>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
   }
 }
