@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import 'dart:io';
 
 import 'package:better_player/better_player.dart';
@@ -11,12 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:caivideo/service/addVideoService.dart';
 
 import 'widget.dart';
-=======
-import 'package:caivideo/model/kategori/HomeKategori.dart';
-import 'package:caivideo/service/KategoriVideo.dart';
-import 'package:caivideo/utils/string.dart';
-import 'package:flutter/material.dart';
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
 
 class AddForm extends StatefulWidget {
   const AddForm({Key? key}) : super(key: key);
@@ -26,7 +19,6 @@ class AddForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AddForm> {
-<<<<<<< HEAD
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,13 +38,10 @@ class Form extends StatefulWidget {
 
 class _FormState extends State<Form> {
   var service = new Upload();
-=======
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
   var email;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   var _currentSelectedValue;
-<<<<<<< HEAD
 
   var x;
   datalist() async {
@@ -67,23 +56,7 @@ class _FormState extends State<Form> {
     print("data geters: $x");
     // return x;
   }
-=======
-     
 
-     var x;
-     datalist() async {
-        await KategoriService.getListKategori().then((value) {
-          List<String> kategoridata = [];
-          for (int i = 0; i < value.length; i++) {
-            kategoridata.add(value[i].name.toString());
-          }
-          x = kategoridata;
-          setState(() {});
-        });
-        print("data geters: $x");
-        // return x;
-      }
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
 
   _showMsg(msg) {
     final snackBar = SnackBar(
@@ -97,8 +70,6 @@ class _FormState extends State<Form> {
   var k = KategoriService();
 
   late var dataku;
-
-<<<<<<< HEAD
   // ====vidiopick====
   var datavideo;
   // =================
@@ -113,9 +84,8 @@ class _FormState extends State<Form> {
   TextEditingController namavidio = TextEditingController();
   TextEditingController deskripsi = TextEditingController();
   // ===/control====
-=======
+
   @override
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -127,10 +97,9 @@ class _FormState extends State<Form> {
     return Container(
         child: ListView(
       children: <Widget>[
-<<<<<<< HEAD
+
         // ====vidio====
-=======
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
+
         Container(
           margin: EdgeInsets.only(left: 5, right: 5, top: 10),
           child: Column(
@@ -143,7 +112,6 @@ class _FormState extends State<Form> {
                 ],
               ),
               GestureDetector(
-<<<<<<< HEAD
                 onTap: () async {
                   var videopick = await ImagePicker()
                       .pickVideo(source: ImageSource.gallery);
@@ -178,18 +146,6 @@ class _FormState extends State<Form> {
                           ),
                         ),
                       ),
-=======
-                onTap: () => print("berfungsi"),
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 5),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3.5,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/image/add/Group 42.png"),
-                          fit: BoxFit.fill)),
-                ),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
               ),
             ],
           ),
@@ -206,7 +162,6 @@ class _FormState extends State<Form> {
                 ],
               ),
               GestureDetector(
-<<<<<<< HEAD
                 onTap: () async {
                   var data = await ImagePicker()
                       .pickImage(source: ImageSource.gallery);
@@ -237,28 +192,15 @@ class _FormState extends State<Form> {
                                 // image:  FileImage(datathumnails),
                                 fit: BoxFit.fill)),
                       ),
-=======
-                onTap: () => print("berfungsi"),
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 5),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 3.5,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/image/add/Group 45.png"),
-                          fit: BoxFit.fill)),
-                ),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
+
               ),
             ],
           ),
         ),
 
         // ===
-<<<<<<< HEAD
         // ==== nama vidio ===
-=======
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
+
         Container(
           margin: EdgeInsets.only(left: 5, right: 5),
           child: Column(
@@ -271,11 +213,8 @@ class _FormState extends State<Form> {
                 ],
               ),
               TextFormField(
-<<<<<<< HEAD
                   key: formGlobalKey,
                   controller: namavidio,
-=======
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -302,12 +241,8 @@ class _FormState extends State<Form> {
             ],
           ),
         ),
-
-<<<<<<< HEAD
         // // ====deskripsi====
-=======
-        // ===
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
+
         Container(
           margin: EdgeInsets.only(left: 5, right: 5),
           child: Column(
@@ -320,11 +255,8 @@ class _FormState extends State<Form> {
                 ],
               ),
               TextFormField(
-<<<<<<< HEAD
                   key: formGlobalKey,
                   controller: deskripsi,
-=======
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -351,20 +283,11 @@ class _FormState extends State<Form> {
             ],
           ),
         ),
-
-<<<<<<< HEAD
         // ==dropdown kategori and sub==
         Container(
           color: Colors.amberAccent,
           margin: EdgeInsets.only(top: 20, left: 5, right: 5, bottom: 30),
           padding: EdgeInsets.only(top: 5, bottom: 5),
-=======
-        // ==dropdown==
-        Container(
-          color: Colors.amberAccent,
-          margin: EdgeInsets.only(top: 20, left: 5, right: 5, bottom: 30),
-          padding: EdgeInsets.only(top: 5,bottom: 5),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -384,7 +307,6 @@ class _FormState extends State<Form> {
 
                     style: TextStyle(color: Colors.white),
                     iconEnabledColor: Colors.black,
-<<<<<<< HEAD
                     items: (x != null)
                         ? x.map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
@@ -408,47 +330,6 @@ class _FormState extends State<Form> {
                               ),
                             );
                           }).toList(),
-=======
-                    // items: <String>[
-                    //   'Android',
-                    //   'IOS',
-                    //   'Flutter',
-                    //   'Node',
-                    //   'Java',
-                    //   'Python',
-                    //   'PHP',
-                    // ].map<DropdownMenuItem<String>>((String value) {
-                    //   return DropdownMenuItem<String>(
-                    //     value: value,
-                    //     child: Text(
-                    //       value,
-                    //       style: TextStyle(color: Colors.black),
-                    //     ),
-                    //   );
-                    // }).toList(),
-                    items: (x!=null)?
-                    x.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                  
-                        value: value,
-                        child: Container(
-                          child: Text(
-                            value,overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
-                      );
-                    }).toList()
-                    :<String>["waiting"].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      );
-                    }).toList(),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
 
                     hint: (_textpriveiw == null)
                         ? Text('Kategory')
@@ -480,14 +361,8 @@ class _FormState extends State<Form> {
                     elevation: 0,
                     style: TextStyle(color: Colors.white),
                     iconEnabledColor: Colors.black,
-<<<<<<< HEAD
                     items: <String>[]
                         .map<DropdownMenuItem<String>>((String value) {
-=======
-                    items: <String>[
-                      
-                    ].map<DropdownMenuItem<String>>((String value) {
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(
@@ -517,8 +392,6 @@ class _FormState extends State<Form> {
           ),
         ),
         // ==/dropdown==
-
-<<<<<<< HEAD
         GestureDetector(
           onTap: () async {
             // var file =
@@ -548,18 +421,6 @@ class _FormState extends State<Form> {
                 color: Colors.purple.shade900,
                 borderRadius: BorderRadius.circular(5)),
           ),
-=======
-        Container(
-          margin: EdgeInsets.only(bottom: 20, right: 5, left: 5),
-          padding: EdgeInsets.all(19),
-          width: MediaQuery.of(context).size.width,
-          child: Center(
-            child: Text("Upload"),
-          ),
-          decoration: BoxDecoration(
-              color: Colors.purple.shade900,
-              borderRadius: BorderRadius.circular(5)),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
         )
       ],
     ));

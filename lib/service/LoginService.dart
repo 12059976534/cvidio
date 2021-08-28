@@ -4,10 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Network {
   final String _url = 'http://alpha.uvid.site';
-<<<<<<< HEAD
   // 192.168.1.2 is my IP, change with your IP address
-=======
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
   var token;
 
   _getToken() async {

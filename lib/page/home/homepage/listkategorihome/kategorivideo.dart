@@ -1,8 +1,5 @@
 import 'package:caivideo/model/kategori/HomeKategori.dart';
-<<<<<<< HEAD
-=======
 import 'package:caivideo/page/home/homepage/listkategorihome/subkategori/subkategori.dart';
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
 import 'package:caivideo/service/KategoriVideo.dart';
 import 'package:flutter/material.dart';
 
@@ -54,42 +51,6 @@ class _KategoriVideoState extends State<KategoriVideo> {
 }
 
 Widget itemvideo(Kategori data, BuildContext context) {
-<<<<<<< HEAD
-  return Padding(
-    padding: const EdgeInsets.all(1.0),
-    child: Container(
-      width: MediaQuery.of(context).size.width / 2,
-      height: 200,
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 120,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image(
-                    image: NetworkImage(data.thumbnail!), fit: BoxFit.fill),
-              ),
-            ),
-          ),
-          Container(
-              child: ListTile(
-            title: Text(
-              data.name!,
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              maxLines: 2,
-            ),
-            subtitle: Text(
-              data.media_count! + " item",
-              style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-              maxLines: 2,
-            ),
-            trailing: Icon(Icons.more_vert),
-          )),
-        ],
-=======
   return GestureDetector(
     onTap: () {
       Navigator.push(
@@ -135,7 +96,6 @@ Widget itemvideo(Kategori data, BuildContext context) {
             )),
           ],
         ),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
       ),
     ),
   );

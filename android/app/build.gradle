@@ -42,11 +42,8 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-<<<<<<< HEAD
-        applicationId "com.example.caivideo"
-=======
+
         applicationId "com.intaro.cryptocurrency.caividio"
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
         minSdkVersion 16
         targetSdkVersion 27
         versionCode flutterVersionCode.toInteger()

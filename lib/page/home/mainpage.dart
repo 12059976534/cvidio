@@ -55,17 +55,7 @@ class _MainPageState extends State<MainPage> {
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.bar_chart),
-<<<<<<< HEAD
-            title: new Text('trending'),
-          ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.add_box_outlined),
-            title: new Text('add video'),
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.playlist_play_outlined),
-              title: Text('playlist')),
-=======
+
             title: new Text('Trending'),
           ),
           BottomNavigationBarItem(
@@ -75,7 +65,6 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.playlist_play_outlined),
               title: Text('Playlist')),
->>>>>>> fb629eb12f1ab2f88e51d8b954fa780efd178983
           BottomNavigationBarItem(
               icon: Icon(Icons.person), title: Text('Profile'))
         ],
